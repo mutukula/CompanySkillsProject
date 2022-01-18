@@ -3,11 +3,12 @@ package com.example.controller;
 import com.example.entity.entityCompanySkills;
 import com.example.exception.exceptionCompanySkills;
 import com.example.repository.RepoCompanySkills;
-import com.example.service.serviceCompanySkills;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import java.util.Collections;
 
 @RestController
 @RequestMapping(value = "/api/companySkills")
@@ -16,11 +17,6 @@ public class controllerCompanySkills {
     @Autowired
     private RepoCompanySkills COMPANYSKILLS;
 
-    @GetMapping
-    public entityCompanySkills Getname(@PathVariable Long Id )
-    {
-        return (entityCompanySkills) COMPANYSKILLS.findAll();
-    }
 
     @PostMapping
     public entityCompanySkills PostMap(@RequestBody entityCompanySkills companySkills)
@@ -33,8 +29,6 @@ public class controllerCompanySkills {
         return COMPANYSKILLS.findById(Id).orElseThrow(()-> new exceptionCompanySkills("user not found"));
     }
 
-
-
     @PutMapping("/{Id}")
     public entityCompanySkills putmap(@RequestBody  entityCompanySkills companySkills, @PathVariable (value = "Id") Long Id){
     entityCompanySkills expected =   COMPANYSKILLS.findById(Id).orElseThrow(()-> new exceptionCompanySkills("user not found"));
@@ -44,5 +38,14 @@ public class controllerCompanySkills {
     expected.setDOB(companySkills.getDOB());
     return COMPANYSKILLS.save(expected);
 
+    }
+
+    @DeleteMapping("/{Id}")
+    public ResponseEntity DeleteByID(@PathVariable Long Id){
+      COMPANYSKILLS.deleteAllById(Collections.singleton(Id));
+      if(Id == null){
+          throw new exceptionCompanySkills("user not found");
+      }
+      return new ResponseEntity(Id, HttpStatus.OK);
     }
 }
