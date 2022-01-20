@@ -1,8 +1,5 @@
 package com.example.entity;
 
-import org.hibernate.annotations.GeneratorType;
-import org.hibernate.tuple.GeneratedValueGeneration;
-
 import javax.persistence.*;
 
 @Entity
