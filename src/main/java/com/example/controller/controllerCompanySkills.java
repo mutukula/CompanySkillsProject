@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 
 @RestController
-@RequestMapping(value = "/api/companySkills")
+@RequestMapping(value = "/api/companySkills/")
 public class controllerCompanySkills {
 
     @Autowired
