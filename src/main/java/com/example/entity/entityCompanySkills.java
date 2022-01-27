@@ -2,12 +2,11 @@ package com.example.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name= "companyskills")
+@Entity(name="companyskills")
 public class entityCompanySkills {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private long Id;
 
     @Column(name = "Name")
     private String Name;
